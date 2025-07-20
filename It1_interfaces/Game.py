@@ -14,22 +14,35 @@ class InvalidBoard(Exception): ...
 class Game:
     def __init__(self, pieces: List[Piece], board: Board):
         """Initialize the game with pieces, board, and optional event bus."""
-        pass
+        self.pieces: List[Piece] = pieces
+        self.board: Board = board
+        self.user_input_queue: queue.Queue[Command] = queue.Queue()
+    
 
     # ─── helpers ─────────────────────────────────────────────────────────────
     def game_time_ms(self) -> int:
         """Return the current game time in milliseconds."""
-        pass
+        return int(round(time.monotonic() * 1000))
 
     def clone_board(self) -> Board:
         """
         Return a **brand-new** Board wrapping a copy of the background pixels
         so we can paint sprites without touching the pristine board.
         """
-        pass
+        new_board = Board(
+            cell_H_pix=self.board.cell_H_pix,
+            cell_W_pix=self.board.cell_W_pix,
+            W_cells=self.board.W_cells,
+            H_cells=self.board.H_cells,
+            img=Img().read(self.board.img.img)  # Clone the image
+        )   
+        if new_board.img is None:
+            raise InvalidBoard("Failed to clone board image.")
+        return new_board
 
     def start_user_input_thread(self):
         """Start the user input thread for mouse handling."""
+        
         pass
 
     # ─── main public entrypoint ──────────────────────────────────────────────

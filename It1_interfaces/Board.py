@@ -10,6 +10,13 @@ class Board:
     H_cells: int
     img: Img
 
+    # def __init__(self, cell_H_pix: int, cell_W_pix: int, W_cells: int, H_cells: int, img: Img):
+    #     self.cell_H_pix = cell_H_pix
+    #     self.cell_W_pix = cell_W_pix
+    #     self.W_cells = W_cells
+    #     self.H_cells = H_cells
+    #     self.img = img
+
     # convenience, not required by dataclass
     def clone(self) -> "Board":
         """Clone the board with a copy of the image."""
